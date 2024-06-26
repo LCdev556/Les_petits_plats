@@ -1,0 +1,211 @@
+.font{
+    font-family: "anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    width: 954px;
+}
+
+.search-container {
+    padding: 8px;
+    margin-top: 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Manrope' ;
+    font-weight: 400;
+    font-size: 16px;
+    
+    
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    padding: 17px;
+    flex: 1;
+    font-size: 12px;
+    border-radius: 10px;
+    border: none;
+}
+
+.search-button {
+    background-color: #1B1B1B;
+    border: none;
+    cursor: pointer;
+    padding: 10px 10px;
+   border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.search-button i {
+    color: #fff;
+    font-size: 20px;
+}
+
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/picture/Recette24.jpg') no-repeat center center/cover;
+    opacity: 0.5 black;
+    filter: brightness(50%);
+    z-index: -1;
+}
+
+.margin-auto-center {
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.header_main_text{
+    font-size: 27px;
+    width: 890px;
+    text-align: center;
+    color: #FFD15B;
+    font-size: 39px;
+    margin-top: 240px;
+
+}
+
+header{
+    height: 667px;
+    font-family: "anton", sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header_logo{
+    margin-left: 3%;
+}
+
+.logo_text{
+    height: 25.26px;
+    width: 180px;
+}
+
+.logo_icon{
+    height: 21.25px;
+    width: 22px;
+    margin-left: -6px;
+    margin-bottom: -4px;
+}
+
+main{
+    background-color: lightgray;
+    height: auto;
+}
+
+.search_section{
+    margin-top: 150px;
+}
+
+.description_titl{
+    color: #ccc;
+}
+
+.caractéristiques{
+    margin-top: 30px;
+    display:grid;
+    grid-template-columns: auto auto;
+    column-gap: 20%;
+    justify-content: center;
+}
+
+.card{
+    width: 275px;
+}
+.quantity{
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.ingredient_name{
+    margin-bottom: 5px;
+}
+
+.description{
+    margin-top: 30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    max-height: 200px;
+}
+
+
+
+#optionsList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#optionsList li {
+    padding: 8px 16px;
+    text-align: left;
+}
+
+#optionsList li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+#optionsList li:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
