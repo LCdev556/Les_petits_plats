@@ -135,7 +135,9 @@ main{
 }
 
 .card{
-    width: 275px;
+    width: 380px;
+    margin-top: 40px;
+    border-radius: 21px;
 }
 .quantity{
     color: #ccc;
@@ -208,4 +210,31 @@ main{
 
 .show {
     display: block;
+}
+
+.hiden{
+    display:none
+}
+
+.recipe_section{
+    justify-content: center;
+    display:grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 85px;
+}
+
+.counter{
+    font-family: "anton", sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.filter_section{
+    display: flex;
+    justify-content: space-between;
+}
+
+main{
+    padding-right: 100px;
+    padding-left: 100px;
 }
