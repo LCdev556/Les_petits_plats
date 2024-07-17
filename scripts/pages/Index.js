@@ -1,7 +1,7 @@
-import { recipes } from "../utils/recipeDataImport.js";
-import { displayRecipeData } from "../utils/recipeDataDisplay.js";
+import { recipes } from "../recipe/import.js";
+import { displayRecipeData } from "../recipe/display.js";
 
-const recipesSection = document.querySelector('recipe_section')
+
 
 
 
@@ -9,5 +9,5 @@ async function init() {
      
     displayRecipeData(recipes)
     
-}
-init()
+} 
+init() 

@@ -22,12 +22,12 @@
     
     <header >
       <div class="background"></div>
-      <div class="header_logo">
-        <img class="logo_text" src="/assets/picture/logo/Les_petits_plats_logo_text.png"></img>
-        <img class="logo_icon" src="/assets/picture/logo/Les_petit_plat_logo_icon.png"></img>
+      <div class="header-logo">
+        <img class="header-logo__text" src="/assets/picture/logo/Les_petits_plats_logo_text.png"></img>
+        <img class="header-logo__icon" src="/assets/picture/logo/Les_petit_plat_logo_icon.png"></img>
       </div>
-      <section class="search_section">
-        <h1 class="header_main_text margin-auto-center">CHERCHER PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN,SIMPLES ET DELICIEUSE </h1>
+      <section class="search-section">
+        <h1 class="header-main-text margin-auto-center">CHERCHER PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN,SIMPLES ET DELICIEUSE </h1>
         <div class="search-container margin-auto-center">
         <input type="search" placeholder="Recherche une recette, un ingredient,..." class="search-input">
         <button class="search-button">
@@ -38,7 +38,7 @@
     </header>
 
     <main>
-      <section class="filter_section">
+      <section class="filter-section">
         <div class="dropdown">
           <button class="dropbtn">Liste 1</button>
           <div id="dropdownContent1" class="dropdown-content">
@@ -87,17 +87,17 @@
           </div>
       </div>
 
-      <div class="counter"><p>1500</p></div>
+      <div class="counter"><p>1500 recettes</p></div>
       </section>
       
-      <section class="recipe_section">
+      <section class="recipe-section">
 
       </section>
     </main>
     
 
-    <script type="module" src="/scripts/pages/Index.js"></script>
-    <script defer type="module" src="/scripts/utils/recipeDataDisplay.js"></script>
-    <script defer src="/scripts/search.js"></script>
+    <script type="module" src="/scripts/pages/index.js"></script>
+    <script defer type="module" src="/scripts/recipe/display.js"></script>
+    <script defer src="/scripts/search/search.js"></script>
   </body>
 </html>

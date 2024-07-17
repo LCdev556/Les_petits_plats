@@ -79,7 +79,7 @@
     
 }
 
-.header_main_text{
+.header-main-text{
     font-size: 27px;
     width: 890px;
     text-align: center;
@@ -97,16 +97,16 @@ header{
     font-style: normal;
 }
 
-.header_logo{
+.header-logo{
     margin-left: 3%;
 }
 
-.logo_text{
+.header-logo__text{
     height: 25.26px;
     width: 180px;
 }
 
-.logo_icon{
+.header-logo__icon{
     height: 21.25px;
     width: 22px;
     margin-left: -6px;
@@ -118,20 +118,23 @@ main{
     height: auto;
 }
 
-.search_section{
+.search-section{
     margin-top: 150px;
 }
 
-.description_titl{
-    color: #ccc;
+.description-title{
+    color: #7A7A7A;
+    font-weight: 700;
+    font-family: 'Manrope';
+    font-size: 14px;
 }
 
 .caractéristiques{
     margin-top: 30px;
     display:grid;
     grid-template-columns: auto auto;
-    column-gap: 20%;
-    justify-content: center;
+    column-gap: 5%;
+    
 }
 
 .card{
@@ -139,13 +142,36 @@ main{
     margin-top: 40px;
     border-radius: 21px;
 }
-.quantity{
-    color: #ccc;
-    margin-top: 5px;
+
+.card-body{
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 55px;
 }
 
-.ingredient_name{
-    margin-bottom: 5px;
+.card-img-top{
+    height: 253px;
+    object-fit: cover;
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.quantity{
+    color: #ccc;
+    margin: 0px;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 14px;
+    color:#7A7A7A
+}
+
+.ingredient-name{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 14px;
+    color: #1B1B1B
 }
 
 .description{
@@ -216,7 +242,7 @@ main{
     display:none
 }
 
-.recipe_section{
+.recipe-section{
     justify-content: center;
     display:grid;
     grid-template-columns: auto auto auto;
@@ -229,7 +255,7 @@ main{
     font-size: 21px;
 }
 
-.filter_section{
+.filter-section{
     display: flex;
     justify-content: space-between;
 }
@@ -237,4 +263,18 @@ main{
 main{
     padding-right: 100px;
     padding-left: 100px;
+}
+
+
+
+.description-text{
+    height: 84px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.card-title{
+    font-size: 18px;
+    margin-top: 16px;
 }
