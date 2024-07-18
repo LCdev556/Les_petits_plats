@@ -4,108 +4,191 @@ const searchInput = document.querySelector(".search-input")
 
 const searchInputButton = document.querySelector(".search-button")
 
-/**
- * Recherche un mot spécifique dans les descriptions des recettes et filtre les cartes des recettes en conséquence.
- * Les cartes correspondantes seront affichées et les autres seront masquées.
- *
- * @function searchInDescription
- */
-export function searchInDescription() {
-    const displayedRecipe = document.querySelectorAll(".description-text");
-    const specificWord = searchInput.value.toLowerCase() + " ";
-    const recipesCard = document.querySelectorAll(".card")
-    
-    
-    // Parcours de toutes les descriptions de recettes
-    for (let i = 0; i < displayedRecipe.length; i++) {
-        const text = displayedRecipe[i].textContent.toLowerCase();
-        const recipeCard = recipesCard[i];
+const recipesCard = document.querySelectorAll(".card")
 
-        // Affichage ou masquage des cartes en fonction de la présence du mot spécifique
-        if (text.includes(specificWord)) {
-            recipeCard.classList.add('show');
-            recipeCard.classList.remove('hiden');
-        } else {
-            recipeCard.classList.add('hiden');
-            recipeCard.classList.remove('show');
-        }
-    }
-}
-
-/**
- * Recherche un mot spécifique dans les titres des recettes et filtre les cartes des recettes en conséquence.
- * Les cartes correspondantes seront affichées et les autres seront masquées.
- *
- * @function searchInTitle
- */
-export function searchInTitle() {
-    const displayedRecipe = document.querySelectorAll(".card-title");
-    const specificWord = searchInput.value.toLowerCase() ;
-    const recipesCard = document.querySelectorAll(".card")
+const recipesCardArray = Array.from(recipesCard)
 
 
-    // Parcours de tous les titres de recettes
-    for (let i = 0; i < displayedRecipe.length; i++) {
-        const text = displayedRecipe[i].textContent.toLowerCase();
-        const recipeCard = recipesCard[i];
-       
-        // Affichage ou masquage des cartes en fonction de la présence du mot spécifique
-        if (text.includes(specificWord)) {
-            recipeCard.classList.add('show');
-            recipeCard.classList.remove('hiden');
-        } else {
-            recipeCard.classList.add('hiden');
-            recipeCard.classList.remove('show');
-        }
-    }
-}
+function searchInDescription(){
 
-/**
- * Recherche un mot spécifique dans les ingrédients des recettes et filtre les cartes des recettes en conséquence.
- * Les cartes correspondantes seront affichées et les autres seront masquées.
- *
- * @function searchInIngredient
- */
-export function searchInIngredient() {
-    const specificWord = searchInput.value.toLowerCase();
-    const recipesCard = document.querySelectorAll(".card")
-    
-    // Parcours de tous les ingrédients des recettes
-    for (let i = 0; i < recipesCard.length; i++) {
-        const recipeCard = recipesCard[i];
-        const ingredients = recipeCard.getAttribute('data-ingredient').toLowerCase();
-        
-        // Affichage ou masquage des cartes en fonction de la présence du mot spécifique
-        if (ingredients.includes(specificWord)) {
-            recipeCard.classList.add('show');
-            recipeCard.classList.remove('hiden');
-        } else {
-            recipeCard.classList.add('hiden');
-            recipeCard.classList.remove('show');
-        }
-    }
+
+    //recuperation des description des carte de recette
+    const displayedRecipe = document.querySelectorAll(".descriptionText")
+
+    //transformation de la liste des description en tableau array
+    const newArray = Array.from(displayedRecipe)
+    console.log(newArray)
+
+    //creation d'un nouveau tableau ne contenant  que le texte des description
+     captionsText = newArray.map(function(newArray) {
+        return newArray.textContent;
+    })
+
+    const lowerCaseTextArray = captionsText.map(text => text.toLowerCase());
+
+    //creation d'un tableau contenent l'index des elements
+    const arrayWithIndexes = lowerCaseTextArray.map((string, index) => ({
+        index: index,
+        value: string
+    }));
+
+    console.log(arrayWithIndexes)
+
+
+    //recuperation de la valeur du champ d'entrée
+    const specificWord = searchInput.value + " ";
+
+    //filtrage du tableau selon la valeur du champ d'entrée
+    const filteredArray = arrayWithIndexes.filter(item => item.value.includes(specificWord));
+    console.log(filteredArray)
+
+    //création d'un tableau contenant les index des elemant filtrés
+    const originalIndexes = filteredArray.map(item => item.index);
+    console.log(originalIndexes);
+
+    //création d'un tableau contenant les recettes selectionnées
+    const selectedRecipes = recipesCardArray.filter((_, index) => originalIndexes.includes(index));
+    console.log(selectedRecipes)
+
+    //création d'un tableau contenant les recettes non selectionées 
+    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !originalIndexes.includes(index));
+    console.log(nonSelectedRecipes)
+
+
+    //affichage et masquage des carte des recette
+    nonSelectedRecipes.forEach(item => item.classList.add('hiden'));
+    nonSelectedRecipes.forEach(item => item.classList.remove('show'));
+
+
+    selectedRecipes.forEach(item => item.classList.add('show'));
+    selectedRecipes.forEach(item => item.classList.remove('hiden'));
 }
 
 
-/**
- * Ajoute un événement sur le bouton de recherche pour lancer la recherche dans les descriptions,
- * les titres, et les ingrédients des recettes, et met à jour le compteur.
- * Calcule également le temps d'exécution de ces opérations.
- * 
- * @event
- */
+
+function searchInTitle(){
+
+
+    //recuperation des description des carte de recette
+    const displayedRecipe = document.querySelectorAll(".card-title")
+
+    //transformation de la liste des description en tableau array
+    const newArray = Array.from(displayedRecipe)
+    console.log(newArray)
+
+    //creation d'un nouveau tableau ne contenant  que le texte des description
+    captionsText = newArray.map(function(newArray) {
+        return newArray.textContent;
+    })
+
+    const lowerCaseTextArray = captionsText.map(text => text.toLowerCase());
+
+    //creation d'un tableau contenent l'index des elements
+    const arrayWithIndexes = lowerCaseTextArray.map((string, index) => ({
+        index: index,
+        value: string
+    }));
+
+    console.log(arrayWithIndexes)
+
+
+    //recuperation de la valeur du champ d'entrée
+    const specificWord = searchInput.value + " ";
+
+    //filtrage du tableau selon la valeur du champ d'entrée
+    const filteredArray = arrayWithIndexes.filter(item => item.value.includes(specificWord));
+    console.log(filteredArray)
+
+    //création d'un tableau contenant les index des elemant filtrés
+    const originalIndexes = filteredArray.map(item => item.index);
+    console.log(originalIndexes);
+
+    //création d'un tableau contenant les recettes selectionnées
+    const selectedRecipes = recipesCardArray.filter((_, index) => originalIndexes.includes(index));
+    console.log(selectedRecipes)
+
+    //création d'un tableau contenant les recettes non selectionées 
+    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !originalIndexes.includes(index));
+    console.log(nonSelectedRecipes)
+
+
+    //affichage et masquage des carte des recette
+    nonSelectedRecipes.forEach(item => item.classList.add('hiden'));
+    nonSelectedRecipes.forEach(item => item.classList.remove('show'));
+
+
+    selectedRecipes.forEach(item => item.classList.add('show'));
+    selectedRecipes.forEach(item => item.classList.remove('hiden'));
+}
+
+function searchInIngredient(){
+
+    const ingredientsArray = Array.from(recipesCard).map(card => card.getAttribute('data-ingredients'));
+    console.log(ingredientsArray)
+
+    //transformation de la liste des description en tableau array
+    //const newArray = Array.from(displayedRecipe)
+    //console.log(newArray)
+
+    //creation d'un nouveau tableau ne contenant  que le texte des description
+    //captionsText = newArray.map(function(newArray) {
+    //    return newArray.textContent;
+    //})
+
+    const lowerCaseTextArray = ingredientsArray.map(text => text.toLowerCase());
+
+    //creation d'un tableau contenent l'index des elements
+    const arrayWithIndexes = lowerCaseTextArray.map((string, index) => ({
+        index: index,
+        value: string
+    }));
+
+    console.log(arrayWithIndexes)
+
+
+    //recuperation de la valeur du champ d'entrée
+    const specificWord = searchInput.value + " ";
+
+    //filtrage du tableau selon la valeur du champ d'entrée
+    const filteredArray = arrayWithIndexes.filter(item => item.value.includes(specificWord));
+    console.log(filteredArray)
+
+    //création d'un tableau contenant les index des elemant filtrés
+    const originalIndexes = filteredArray.map(item => item.index);
+    console.log(originalIndexes);
+
+    //création d'un tableau contenant les recettes selectionnées
+    const selectedRecipes = recipesCardArray.filter((_, index) => originalIndexes.includes(index));
+    console.log(selectedRecipes)
+
+    //création d'un tableau contenant les recettes non selectionées 
+    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !originalIndexes.includes(index));
+    console.log(nonSelectedRecipes)
+
+
+    //affichage et masquage des carte des recette
+    nonSelectedRecipes.forEach(item => item.classList.add('hiden'));
+    nonSelectedRecipes.forEach(item => item.classList.remove('show'));
+
+
+    selectedRecipes.forEach(item => item.classList.add('show'));
+    selectedRecipes.forEach(item => item.classList.remove('hiden'));
+}
+
+function counter(){
+    let counter = document.querySelector(".counter")
+
+    const actualRecipeCard = document.querySelectorAll(' .show')
+    console.log(actualRecipeCard)
+
+    counter.textContent = actualRecipeCard.length
+}
+
 searchInputButton.addEventListener("click", (event) => {
-    const start = performance.now();
-
-    searchInDescription();
-    searchInTitle();
-    searchInIngredient();
-    counter();
-
-    const end = performance.now();
-    const executionTime = end - start;
-
-    console.log(`Temps d'exécution: ${executionTime} ms`);
+  
+    searchInDescription()
+    searchInTitle()
+    searchInIngredient()
+    counter()
 });
-
 
