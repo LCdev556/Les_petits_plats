@@ -1,4 +1,5 @@
 import { recipeTemplate } from "../template/recipe-card-template.js";
+import { iniCounter } from "../Counter/Counter.js";
 
 
 
@@ -12,5 +13,7 @@ export async function displayRecipeData(recipes){
        
         
         recipesSection.appendChild(recipeCardDOM);
+        
     });
+    iniCounter();
 }

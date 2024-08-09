@@ -1,6 +1,6 @@
 export function recipeTemplate(recipe){
 
-    const {id, name, image, ingredients, description, ustensils } = recipe;
+    const {id, name, image, ingredients, description, ustensils, time, appliance } = recipe;
 
     const picture = `assets/picture/${image}`;
 
@@ -11,9 +11,12 @@ export function recipeTemplate(recipe){
         card.setAttribute('data-id', id);
 
         const ingredientsString = ingredients.map(item => item.ingredient).join(' , ');
-        card.setAttribute('data-ingredients', ingredientsString);
+        card.setAttribute('data-ingredient', ingredientsString);
         
-        card.setAttribute('data-ustensils', ustensils)
+        const ustensilsString = ustensils.map(u => u.toLowerCase()).join(' , ');
+        card.setAttribute('data-ustensil', ustensilsString);
+
+        card.setAttribute('data-appliance', appliance)
 
         const cardPicture = document.createElement('img');
         cardPicture.setAttribute("src", picture);
@@ -46,13 +49,18 @@ export function recipeTemplate(recipe){
         ingredientListTitle.textContent = "Ingrédients"
         ingredientListTitle.className = "description-title"
 
-        
+        const timeTag = document.createElement('div')
+        timeTag.textContent = time + "min"
+        timeTag.className = "time-tag"
 
+
+
+        
         ingredients.forEach(Element => {
             
-            const {quantity, unit, ingredient } = Element;
+            const {quantity, unit, /**ingredient*/ } = Element;
 
-            card.setAttribute('data-ingredient', ingredient)
+            //card.setAttribute('data-ingredient', ingredient)
 
             const IngredientElement = document.createElement('div')
             IngredientElement.className = "ingrédient"
@@ -81,6 +89,7 @@ export function recipeTemplate(recipe){
         });
 
         card.appendChild(cardPicture)
+        card.appendChild(timeTag)
         cardContent.appendChild(recipeTitle)
         descriptionContainer.appendChild(descriptionTitle)
         descriptionContainer.appendChild(descriptionText)

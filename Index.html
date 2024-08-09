@@ -5,6 +5,9 @@
    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,59 +42,49 @@
 
     <main>
       <section class="filter-section">
-        <div class="dropdown">
-          <button class="dropbtn">Liste 1</button>
-          <div id="dropdownContent1" class="dropdown-content">
-              <div class="search-container">
-                  <input type="text" placeholder="Rechercher..." id="searchInput1" onkeyup="filterFunction(1)">
+        <div class="dropdown dropdown1">
+          <button id="dropbtn1" class="dropbtn">Ingredient <i id="chevron1" class="chevron fa-solid fa-chevron-down"></i></button>
+            <div id="dropdownContent1" class="dropdown-content">
+              <div class="filter-search-container">
+                  <input  class="filter-search-input" type="search"  id="searchInput1" <!--onkeyup="filterFunction(1)-->">
+                  <i class="filter-loupe-icon fa-solid fa-magnifying-glass"></i>
               </div>
-              <ul id="optionsList1">
-                  <li><a href="#">Option 1</a></li>
-                  <li><a href="#">Option 2</a></li>
-                  <li><a href="#">Option 3</a></li>
-                  <li><a href="#">Option 4</a></li>
-                  <li><a href="#">Option 5</a></li>
+              <ul class="filter-list" id="optionsList1">     
               </ul>
-          </div>
-      </div>
+            </div>
+        </div>
   
-      <div class="dropdown">
-          <button class="dropbtn">Liste 2</button>
+      <div class="dropdown dropdown2">
+          <button  id="dropbtn2" class="dropbtn">Appareils <i id="chevron2" class="chevron fa-solid fa-chevron-down"></i></button>
           <div id="dropdownContent2" class="dropdown-content">
-              <div class="search-container">
-                  <input type="text" placeholder="Rechercher..." id="searchInput2" onkeyup="filterFunction(2)">
+              <div class="filter-search-container">
+                  <input class="filter-search-input" type="search"   id="searchInput2">
+                  <i class="filter-loupe-icon fa-solid fa-magnifying-glass"></i>
               </div>
-              <ul id="optionsList2">
-                  <li><a href="#">Option A</a></li>
-                  <li><a href="#">Option B</a></li>
-                  <li><a href="#">Option C</a></li>
-                  <li><a href="#">Option D</a></li>
-                  <li><a href="#">Option E</a></li>
+              <ul class="filter-list" id="optionsList2">   
               </ul>
           </div>
       </div>
   
-      <div class="dropdown">
-          <button class="dropbtn">Liste 3</button>
+      <div class="dropdown dropdown3">
+          <button id="dropbtn3" class="dropbtn">Ustensils <i id="chevron3" class="chevron fa-solid fa-chevron-down"></i></button>
           <div id="dropdownContent3" class="dropdown-content">
-              <div class="search-container">
-                  <input type="text" placeholder="Rechercher..." id="searchInput3" onkeyup="filterFunction(3)">
+              <div class="filter-search-container">
+                  <input  class="filter-search-input" type="search"  id="searchInput3" >
+                  <i class="fa-solid fa-magnifying-glass"></i>
               </div>
-              <ul id="optionsList3">
-                  <li><a href="#">Item 1</a></li>
-                  <li><a href="#">Item 2</a></li>
-                  <li><a href="#">Item 3</a></li>
-                  <li><a href="#">Item 4</a></li>
-                  <li><a href="#">Item 5</a></li>
+              <ul class="filter-list" id="optionsList3">
               </ul>
           </div>
       </div>
 
-      <div class="counter"><p>1500 recettes</p></div>
+      <div class="counter"><p class="counter__text">1500 recettes</p></div>
       </section>
-      
-      <section class="recipe-section">
 
+      <section class="filter-tag-section">
+      </section>
+
+      <section class="recipe-section">
       </section>
     </main>
     
@@ -99,5 +92,13 @@
     <script type="module" src="/scripts/pages/index.js"></script>
     <script defer type="module" src="/scripts/recipe/display.js"></script>
     <script defer src="/scripts/search/search.js"></script>
+    <script type="module" src="/scripts/filters/display.js"></script>
+    <!--
+    <script type="module" src="/scripts/filters/data-management.js"></script>
+    <script type="module" src="/scripts/filters/appliances-filtering.js"></script>
+    <script type="module" src="/scripts/filters/ustensils-filtering.js"></script>-->
+    <script type="module" src="/scripts/filters/test-refacto.js"></script>
+    <script type="module" src="/scripts/Counter/Counter.js"></script>
+    <script src="/scripts/style/Style.js"></script>
   </body>
 </html>

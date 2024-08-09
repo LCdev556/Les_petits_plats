@@ -8,12 +8,15 @@ const recipesCardArrayLength = recipesCard.length;
 function searchInDescription() {
     const displayedRecipe = document.querySelectorAll(".description-text");
     const specificWord = searchInput.value.toLowerCase() + " ";
+    const recipesCard = document.querySelectorAll(".card")
+    
 
     console.log(displayedRecipe)
     // Parcours de toutes les descriptions
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
         const recipeCard = recipesCard[i];
+        console.log(recipeCard);
         
 
         if (text.includes(specificWord)) {
@@ -28,12 +31,15 @@ function searchInDescription() {
 
 function searchInTitle() {
     const displayedRecipe = document.querySelectorAll(".card-title");
-    const specificWord = searchInput.value.toLowerCase() + " ";
+    const specificWord = searchInput.value.toLowerCase() ;
+    const recipesCard = document.querySelectorAll(".card")
+
 
     // Parcours de tous les titres
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
         const recipeCard = recipesCard[i];
+        console.log(recipeCard);
 
         if (text.includes(specificWord)) {
             recipeCard.classList.add('show');
@@ -46,12 +52,13 @@ function searchInTitle() {
 }
 
 function searchInIngredient() {
-    const specificWord = searchInput.value.toLowerCase() + " ";
-
-    for (let i = 0; i < recipesCardArrayLength; i++) {
+    const specificWord = searchInput.value.toLowerCase();
+    const recipesCard = document.querySelectorAll(".card")
+    
+    for (let i = 0; i < recipesCard.length; i++) {
         const recipeCard = recipesCard[i];
-        const ingredients = recipeCard.getAttribute('data-ingredients').toLowerCase();
-
+        const ingredients = recipeCard.getAttribute('data-ingredient').toLowerCase();
+        
         if (ingredients.includes(specificWord)) {
             recipeCard.classList.add('show');
             recipeCard.classList.remove('hiden');
@@ -77,5 +84,5 @@ searchInputButton.addEventListener("click", (event) => {
     searchInIngredient()
     counter()
 });
-//test
+
 
