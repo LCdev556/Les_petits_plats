@@ -3,7 +3,7 @@ import { recipes } from "../recipe/import.js";
 import { counter } from "../Counter/Counter.js";
 
 // Get elements from the DOM
-const filterSection = document.querySelector('.filter-section');
+//const filterSection = document.querySelector('.filter-section');
 
 const searchInputs = {
     ingredient: document.querySelector('#searchInput1'),
@@ -17,14 +17,14 @@ const optionsLists = {
     ustensil: document.querySelector('#optionsList3')
 };
 
-// Arrays to hold unique ingredients, appliances, and utensils
+
 const ingredientsArray = [];
 const appliancesArray = [];
 const ustensilsArray = [];
 
-// Extract data from recipes
+
 recipes.forEach(recipe => {
-    // Extract ingredients
+    
     recipe.ingredients.forEach(ingredient => {
         const ingredientName = ingredient.ingredient.toLowerCase();
         if (!ingredientsArray.includes(ingredientName)) {
@@ -32,13 +32,13 @@ recipes.forEach(recipe => {
         }
     });
 
-    // Extract appliances
+    
     const applianceName = recipe.appliance.toLowerCase();
     if (!appliancesArray.includes(applianceName)) {
         appliancesArray.push(applianceName);
     }
 
-    // Extract utensils
+    
     recipe.ustensils.forEach(ustensil => {
         const ustensilName = ustensil.toLowerCase();
         if (!ustensilsArray.includes(ustensilName)) {
@@ -47,10 +47,10 @@ recipes.forEach(recipe => {
     });
 });
 
-// Function to create filter list
+
 function createFilterList(filterType, filterArray) {
     const optionsList = optionsLists[filterType];
-    optionsList.innerHTML = ""; // Clear current list
+    optionsList.innerHTML = ""; 
 
     filterArray.forEach(element => {
         const filterListElement = document.createElement('li');
@@ -67,7 +67,7 @@ function createFilterList(filterType, filterArray) {
     });
 }
 
-// Function to add filter tag
+
 function addFilter(filterType, selectedElement) {
     console.log("hahah")
     const filterTag = document.createElement('div');
@@ -91,7 +91,7 @@ function addFilter(filterType, selectedElement) {
            
             const NameOfClass = `filter-${selectedElement.replace(/\s+/g, '-').toLowerCase()}`
             
-            if(element.classList.contains(NameOfClass)  /**`filter-${selectedElement.replace(/\s+/g, '-').toLowerCase()}` */){ 
+            if(element.classList.contains(NameOfClass)  ){ 
 
                 element.classList.remove (`filter-${selectedElement.replace(/\s+/g, '-').toLowerCase()}`)
                 element.classList.add('show')
@@ -103,29 +103,14 @@ function addFilter(filterType, selectedElement) {
     filterTag.appendChild(removeBtn)
 
     const filterTagSection = document.querySelector(".filter-tag-section")
-    if(filterType === "ingredient"){
-        //const ingredientFilterTagContainer = document.querySelector(/**".ingredient-filter-tag-container"*/".dropdown1")
-        //ingredientFilterTagContainer.appendChild(filterTag)
-        filterTagSection.appendChild(filterTag)
-    }
 
-    if(filterType === "appliance"){
-        //const appliancesFilterTagContainer = document.querySelector(/**".appliances-filter-tag-container"*/".dropdown2")
-        //appliancesFilterTagContainer.appendChild(filterTag)
-        filterTagSection.appendChild(filterTag)
-    }
-
-    if(filterType === "ustensil"){
-        //const ustencilsFilterTagContainer = document.querySelector(/**".ustencils-filter-tag-container"*/".dropdown3")
-        //ustencilsFilterTagContainer.appendChild(filterTag)
-        filterTagSection.appendChild(filterTag)
-    }
+    filterTagSection.appendChild(filterTag)
     
-    //filterSection.appendChild(filterTag);
+    
     searchInRecipes(filterType, selectedElement);
 }
 
-// Function to search in recipes
+
 function searchInRecipes(filterType, selectedElement) {
     console.log(filterType)
     const specificWord = selectedElement.toLowerCase();
@@ -151,7 +136,7 @@ function searchInRecipes(filterType, selectedElement) {
     });
 }
 
-// Function to create CSS class dynamically
+
 function createCSSClass(className, rules) {
     const style = document.createElement('style');
     style.type = 'text/css';
@@ -159,7 +144,7 @@ function createCSSClass(className, rules) {
     document.getElementsByTagName('head')[0].appendChild(style);
 }
 
-// Event listeners for search inputs
+
 Object.keys(searchInputs).forEach(filterType => {
     searchInputs[filterType].addEventListener('input', () => {
         const searchValue = searchInputs[filterType].value.toLowerCase();
@@ -170,7 +155,7 @@ Object.keys(searchInputs).forEach(filterType => {
     });
 });
 
-// Exported functions for initial creation of filter lists
+
 export function ingredientFilterListeCreation() {
     createFilterList('ingredient', ingredientsArray);
 }
@@ -183,7 +168,7 @@ export function ustensilsFilterListeCreation() {
     createFilterList('ustensil', ustensilsArray);
 }
 
-// Initial creation of filter lists
+
 ingredientFilterListeCreation();
 applianceFilterListeCreation();
 ustensilsFilterListeCreation();

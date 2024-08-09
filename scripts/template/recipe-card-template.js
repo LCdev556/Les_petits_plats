@@ -58,9 +58,9 @@ export function recipeTemplate(recipe){
         
         ingredients.forEach(Element => {
             
-            const {quantity, unit, /**ingredient*/ } = Element;
+            const {quantity, unit,  } = Element;
 
-            //card.setAttribute('data-ingredient', ingredient)
+            
 
             const IngredientElement = document.createElement('div')
             IngredientElement.className = "ingrédient"

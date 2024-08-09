@@ -1,6 +1,4 @@
-/**import { ingredientFilterListeCreation } from "./data-management.js";
-import { applianceFilterListeCreation } from "./appliances-filtering.js";
-import { ustensilsFilterListeCreation } from "./ustensils-filtering.js";*/
+
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -10,9 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var chevron = document.getElementById(chevronId);
 
         button.addEventListener('click', function() {
-            /**ingredientFilterListeCreation()
-            applianceFilterListeCreation()
-            ustensilsFilterListeCreation()*/
+            
             if (content.style.display === 'block') {
                 content.style.display = 'none';
                 button.className = 'dropbtn';
@@ -30,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    // Initialisation des dropdowns
     toggleDropdown('dropbtn1', 'dropdownContent1', 'chevron1');
     toggleDropdown('dropbtn2', 'dropdownContent2', 'chevron2');
     toggleDropdown('dropbtn3', 'dropdownContent3', 'chevron3');

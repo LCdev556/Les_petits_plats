@@ -2,8 +2,6 @@ const searchInput = document.querySelector(".search-input")
 
 const searchInputButton = document.querySelector(".search-button")
 
-const recipesCard = document.querySelectorAll(".card")
-const recipesCardArrayLength = recipesCard.length;
 
 function searchInDescription() {
     const displayedRecipe = document.querySelectorAll(".description-text");
@@ -12,7 +10,7 @@ function searchInDescription() {
     
 
     console.log(displayedRecipe)
-    // Parcours de toutes les descriptions
+    
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
         const recipeCard = recipesCard[i];
@@ -35,7 +33,7 @@ function searchInTitle() {
     const recipesCard = document.querySelectorAll(".card")
 
 
-    // Parcours de tous les titres
+    
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
         const recipeCard = recipesCard[i];
@@ -79,10 +77,17 @@ function counter(){
 }
 
 searchInputButton.addEventListener("click", (event) => {
-    searchInDescription()
-    searchInTitle()
-    searchInIngredient()
-    counter()
+    const start = performance.now();
+
+    searchInDescription();
+    searchInTitle();
+    searchInIngredient();
+    counter();
+
+    const end = performance.now();
+    const executionTime = end - start;
+
+    console.log(`Temps d'exécution: ${executionTime} ms`);
 });
 
 

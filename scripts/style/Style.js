@@ -5,7 +5,7 @@ function adjustDivWidths() {
     const width1 = window.getComputedStyle(div1).width;
     div2.style.width = width1;
 
-    console.log("ah")
+    
 };
 
 adjustDivWidths();
