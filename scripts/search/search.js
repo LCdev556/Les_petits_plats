@@ -1,4 +1,4 @@
-import {counter} 
+
 
 /**
  * Sélectionne l'élément du champ de saisie pour la recherche de recettes.
