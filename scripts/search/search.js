@@ -22,7 +22,7 @@ const recipesCardArray = Array.from(recipesCard)
 /**
  * Recherche des recettes dans les descriptions et affiche les résultats.
  */
-function searchInDescription(){
+export function searchInDescription(){
 
 
     //recuperation des description des carte de recette
@@ -73,7 +73,7 @@ function searchInDescription(){
 /**
  * Recherche des recettes dans les titres et affiche les résultats.
  */
-function searchInTitle(){
+export function searchInTitle(){
 
 
     //recuperation des description des carte de recette
@@ -122,7 +122,7 @@ function searchInTitle(){
 /**
  * Recherche des recettes dans les ingrédients et affiche les résultats.
  */
-function searchInIngredient(){
+export function searchInIngredient(){
 
     const ingredientsArray = Array.from(recipesCard).map(card => card.getAttribute('data-ingredients'));
     
