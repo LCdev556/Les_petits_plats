@@ -1,4 +1,4 @@
-import {Counter} from "../Counter/Counter.js"
+import {counter} from "../Counter/Counter.js"
 
 /**
  * Sélectionne l'élément du champ de saisie pour la recherche de recettes.
@@ -179,7 +179,7 @@ searchInputButton.addEventListener("click", (event) => {
     searchInDescription();
     searchInTitle();
     searchInIngredient();
-    Counter();
+    counter();
 
     const end = performance.now();
     const executionTime = end - start;
