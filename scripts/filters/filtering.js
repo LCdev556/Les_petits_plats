@@ -1,28 +1,28 @@
-
 import { recipes } from "../recipe/import.js";
 import { counter } from "../Counter/Counter.js";
+import { searchInDescription, searchInIngredient, searchInTitle } from "../search/search.js";
 
-// Get elements from the DOM
-//const filterSection = document.querySelector('.filter-section');
 
+//Recuperation des champs d'entrée des liste de filtre
 const searchInputs = {
     ingredient: document.querySelector('#searchInput1'),
     appliance: document.querySelector('#searchInput2'),
     ustensil: document.querySelector('#searchInput3')
 };
 
+//Recuperation des elements contenants la liste de filtres
 const optionsLists = {
     ingredient: document.querySelector('#optionsList1'),
     appliance: document.querySelector('#optionsList2'),
     ustensil: document.querySelector('#optionsList3')
 };
 
-
+//Initialisation des tableaux contenant les filtres
 const ingredientsArray = [];
 const appliancesArray = [];
 const ustensilsArray = [];
 
-
+//Ajout des different elements au tableau de filtre correspondant
 recipes.forEach(recipe => {
     
     recipe.ingredients.forEach(ingredient => {
@@ -47,7 +47,11 @@ recipes.forEach(recipe => {
     });
 });
 
-
+/**
+ * Crée la liste des filtres en fonction du type de filtre et du tableau des éléments de filtre.
+ * @param {string} filterType - Le type de filtre (ingredient, appliance, ustensil).
+ * @param {string[]} filterArray - Le tableau des éléments de filtre.
+ */
 function createFilterList(filterType, filterArray) {
     const optionsList = optionsLists[filterType];
     optionsList.innerHTML = ""; 
@@ -60,6 +64,9 @@ function createFilterList(filterType, filterArray) {
         filterListElement.setAttribute('id', cleanElement);
         filterListElement.addEventListener('click', () => {
             addFilter(filterType, element);
+            searchInDescription();
+            searchInTitle();
+            searchInIngredient();
             counter();
             filterListElement.style.display = "none"
         });
@@ -67,9 +74,12 @@ function createFilterList(filterType, filterArray) {
     });
 }
 
-
+/**
+ * Ajoute un filtre sélectionné à la liste des filtres actifs et met à jour les recettes affichées.
+ * @param {string} filterType - Le type de filtre (ingredient, appliance, ustensil).
+ * @param {string} selectedElement - L'élément de filtre sélectionné.
+ */
 function addFilter(filterType, selectedElement) {
-    console.log("hahah")
     const filterTag = document.createElement('div');
     const filterTagName = document.createElement('p')
     filterTagName.className = "filter-tag__name"
@@ -97,6 +107,9 @@ function addFilter(filterType, selectedElement) {
                 element.classList.add('show')
              } 
         });
+        searchInDescription();
+        searchInTitle();
+        searchInIngredient();
         counter()
     })
     filterTag.appendChild(filterTagName)
@@ -110,7 +123,11 @@ function addFilter(filterType, selectedElement) {
     searchInRecipes(filterType, selectedElement);
 }
 
-
+/**
+ * Filtre les recettes affichées en fonction du type et de l'élément de filtre sélectionné.
+ * @param {string} filterType - Le type de filtre (ingredient, appliance, ustensil).
+ * @param {string} selectedElement - L'élément de filtre sélectionné.
+ */
 function searchInRecipes(filterType, selectedElement) {
     console.log(filterType)
     const specificWord = selectedElement.toLowerCase();
@@ -136,7 +153,11 @@ function searchInRecipes(filterType, selectedElement) {
     });
 }
 
-
+/**
+ * Crée une nouvelle classe CSS avec les règles spécifiées.
+ * @param {string} className - Le nom de la classe CSS.
+ * @param {string} rules - Les règles CSS à appliquer.
+ */
 function createCSSClass(className, rules) {
     const style = document.createElement('style');
     style.type = 'text/css';
@@ -144,7 +165,7 @@ function createCSSClass(className, rules) {
     document.getElementsByTagName('head')[0].appendChild(style);
 }
 
-
+// Ajoute un écouteur d'événements sur chaque champ de recherche pour mettre à jour la liste des filtres.
 Object.keys(searchInputs).forEach(filterType => {
     searchInputs[filterType].addEventListener('input', () => {
         const searchValue = searchInputs[filterType].value.toLowerCase();
@@ -155,20 +176,28 @@ Object.keys(searchInputs).forEach(filterType => {
     });
 });
 
-
+/**
+ * Initialise la liste des filtres pour les ingrédients.
+ */
 export function ingredientFilterListeCreation() {
     createFilterList('ingredient', ingredientsArray);
 }
 
+/**
+ * Initialise la liste des filtres pour les appareils.
+ */
 export function applianceFilterListeCreation() {
     createFilterList('appliance', appliancesArray);
 }
 
+/**
+ * Initialise la liste des filtres pour les ustensiles.
+ */
 export function ustensilsFilterListeCreation() {
     createFilterList('ustensil', ustensilsArray);
 }
 
-
+// Initialisation des listes de filtres
 ingredientFilterListeCreation();
 applianceFilterListeCreation();
 ustensilsFilterListeCreation();

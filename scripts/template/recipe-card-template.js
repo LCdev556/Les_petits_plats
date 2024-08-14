@@ -1,9 +1,32 @@
+/**
+ * Génère un modèle de carte de recette (recipe card) à partir des données d'une recette.
+ * 
+ * @param {Object} recipe - L'objet représentant la recette.
+ * @param {number} recipe.id - L'identifiant unique de la recette.
+ * @param {string} recipe.name - Le nom de la recette.
+ * @param {string} recipe.image - Le nom de l'image associée à la recette.
+ * @param {Array<Object>} recipe.ingredients - La liste des ingrédients de la recette.
+ * @param {string} recipe.ingredients[].ingredient - Le nom de l'ingrédient.
+ * @param {number} [recipe.ingredients[].quantity] - La quantité de l'ingrédient (facultatif).
+ * @param {string} [recipe.ingredients[].unit] - L'unité de mesure de la quantité (facultatif).
+ * @param {string} recipe.description - La description de la recette.
+ * @param {Array<string>} recipe.ustensils - La liste des ustensiles nécessaires pour la recette.
+ * @param {number} recipe.time - Le temps de préparation en minutes.
+ * @param {string} recipe.appliance - L'appareil utilisé pour préparer la recette.
+ * 
+ * @returns {Object} Un objet contenant la méthode `getRecipeCard` pour obtenir l'élément DOM représentant la carte de la recette.
+ */
 export function recipeTemplate(recipe){
 
     const {id, name, image, ingredients, description, ustensils, time, appliance } = recipe;
 
     const picture = `assets/picture/${image}`;
 
+    /**
+     * Crée et retourne un élément DOM représentant une carte de recette.
+     * 
+     * @returns {HTMLElement} L'élément article représentant la carte de recette.
+     */
     function getRecipeCard() {
 
         const card = document.createElement ('article');

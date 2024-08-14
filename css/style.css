@@ -405,7 +405,7 @@ main{
     align-items: center;
     position: absolute;
     margin-left: 78%;
-    margin-top: 20px;
+    top: 20px;
 }
 
 .filter-tag{

@@ -1,7 +1,14 @@
 
-
 document.addEventListener('DOMContentLoaded', function() {
 
+
+    /**
+     * Fontion de gestion de l'affichage des listes de filtres
+     * 
+     * @param {HTMLElement} buttonId 
+     * @param {HTMLElement} contentId 
+     * @param {HTMLElement} chevronId 
+     */
     function toggleDropdown(buttonId, contentId, chevronId) {
         var button = document.getElementById(buttonId);
         var content = document.getElementById(contentId);
