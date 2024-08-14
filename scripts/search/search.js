@@ -174,9 +174,16 @@ function searchInIngredient(){
  */
 searchInputButton.addEventListener("click", (event) => {
   
-    searchInDescription()
-    searchInTitle()
-    searchInIngredient()
-    Counter()
+    const start = performance.now();
+
+    searchInDescription();
+    searchInTitle();
+    searchInIngredient();
+    Counter();
+
+    const end = performance.now();
+    const executionTime = end - start;
+
+    console.log(`Temps d'exécution: ${executionTime} ms`);
 });
 
