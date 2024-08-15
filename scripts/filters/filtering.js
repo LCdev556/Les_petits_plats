@@ -1,6 +1,6 @@
 import { recipes } from "../recipe/import.js";
 import { counter } from "../Counter/Counter.js";
-import { searchInDescription, searchInIngredient, searchInTitle } from "../search/search.js";
+import { searchInDescription, searchInIngredient, searchInTitle, updateRecipeVisibility } from "../search/search.js";
 
 
 //Recuperation des champs d'entrée des liste de filtre
@@ -67,6 +67,15 @@ function createFilterList(filterType, filterArray) {
             searchInDescription();
             searchInTitle();
             searchInIngredient();
+            const descriptionIndices = searchInDescription();
+        const titleIndices = searchInTitle();
+        const ingredientIndices = searchInIngredient();
+
+        // Combiner tous les indices pour obtenir un ensemble final
+        const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
+
+        // Mettre à jour la visibilité des recettes en fonction des indices combinés
+        updateRecipeVisibility(combinedIndices);
             counter();
             filterListElement.style.display = "none"
         });
@@ -110,6 +119,7 @@ function addFilter(filterType, selectedElement) {
         searchInDescription();
         searchInTitle();
         searchInIngredient();
+        
         counter()
     })
     filterTag.appendChild(filterTagName)

@@ -1,4 +1,5 @@
-import {counter} from "../Counter/Counter.js"
+
+import { counter } from "../Counter/Counter.js"
 
 /**
  * Sélectionne l'élément du champ de saisie pour la recherche de recettes.
@@ -13,177 +14,115 @@ const searchInput = document.querySelector(".search-input")
 const searchInputButton = document.querySelector(".search-button")
 
 /**
- * Sélectionne toutes les cartes de recettes et les transforme en tableau.
- * @type {HTMLElement[]}
+ * Filtre les cartes de recettes en fonction des critères de recherche et met à jour leur visibilité.
+ * @param {Set<number>} visibleIndices - Ensemble des indices des recettes à afficher.
  */
-const recipesCard = document.querySelectorAll(".card")
-const recipesCardArray = Array.from(recipesCard)
-
-/**
- * Recherche des recettes dans les descriptions et affiche les résultats.
- */
-export function searchInDescription(){
-
-
-    //recuperation des description des carte de recette
-    const displayedRecipe = document.querySelectorAll(".descriptionText")
-
-    //transformation de la liste des description en tableau array
-    const newArray = Array.from(displayedRecipe)
+export function updateRecipeVisibility(visibleIndices) {
     
-    //creation d'un nouveau tableau ne contenant  que le texte des description
-    const captionsText = newArray.map(function(newArray) {
-        return newArray.textContent;
-    })
+    const recipesCard = document.querySelectorAll(".card");
+    const recipesCardArray = Array.from(recipesCard);
 
-    // Conversion des textes en minuscules
-    const lowerCaseTextArray = captionsText.map(text => text.toLowerCase());
-
-    //creation d'un tableau contenent l'index des elements
-    const arrayWithIndexes = lowerCaseTextArray.map((string, index) => ({
-        index: index,
-        value: string
-    }));
-
-    //recuperation de la valeur du champ d'entrée
-    const specificWord = searchInput.value;
-
-    //filtrage du tableau selon la valeur du champ d'entrée
-    const filteredArray = arrayWithIndexes.filter(item => item.value.includes(specificWord));
+    const selectedRecipes = recipesCardArray.filter((_, index) => visibleIndices.has(index));
     
-    //création d'un tableau contenant les index des elemant filtrés
-    const originalIndexes = filteredArray.map(item => item.index);
+    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !visibleIndices.has(index));
     
-    //création d'un tableau contenant les recettes selectionnées
-    const selectedRecipes = recipesCardArray.filter((_, index) => originalIndexes.includes(index));
+    selectedRecipes.forEach(item => {
+        item.classList.remove('hiden');
+        item.classList.add('show');
+    });
+
+    nonSelectedRecipes.forEach(item => {
+        
+        item.classList.remove('show');
+        item.classList.add('hiden');
+    });
+
     
-    //création d'un tableau contenant les recettes non selectionées 
-    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !originalIndexes.includes(index));
-    
-    //affichage et masquage des carte des recette
-    nonSelectedRecipes.forEach(item => item.classList.add('hiden'));
-    nonSelectedRecipes.forEach(item => item.classList.remove('show'));
-
-
-    selectedRecipes.forEach(item => item.classList.add('show'));
-    selectedRecipes.forEach(item => item.classList.remove('hiden'));
-}
-
-
-/**
- * Recherche des recettes dans les titres et affiche les résultats.
- */
-export function searchInTitle(){
-
-
-    //recuperation des description des carte de recette
-    const displayedRecipe = document.querySelectorAll(".card-title")
-
-    //transformation de la liste des description en tableau array
-    const newArray = Array.from(displayedRecipe)
-    
-    //creation d'un nouveau tableau ne contenant  que le texte des description
-    const captionsText = newArray.map(function(newArray) {
-        return newArray.textContent;
-    })
-
-    const lowerCaseTextArray = captionsText.map(text => text.toLowerCase());
-
-    //creation d'un tableau contenent l'index des elements
-    const arrayWithIndexes = lowerCaseTextArray.map((string, index) => ({
-        index: index,
-        value: string
-    }));
-
-    //recuperation de la valeur du champ d'entrée
-    const specificWord = searchInput.value;
-
-    //filtrage du tableau selon la valeur du champ d'entrée
-    const filteredArray = arrayWithIndexes.filter(item => item.value.includes(specificWord));
-    
-    //création d'un tableau contenant les index des elemant filtrés
-    const originalIndexes = filteredArray.map(item => item.index);
-    
-    //création d'un tableau contenant les recettes selectionnées
-    const selectedRecipes = recipesCardArray.filter((_, index) => originalIndexes.includes(index));
-    
-    //création d'un tableau contenant les recettes non selectionées 
-    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !originalIndexes.includes(index));
-    
-    //affichage et masquage des carte des recette
-    nonSelectedRecipes.forEach(item => item.classList.add('hiden'));
-    nonSelectedRecipes.forEach(item => item.classList.remove('show'));
-
-
-    selectedRecipes.forEach(item => item.classList.add('show'));
-    selectedRecipes.forEach(item => item.classList.remove('hiden'));
 }
 
 /**
- * Recherche des recettes dans les ingrédients et affiche les résultats.
+ * Recherche des recettes dans les descriptions et retourne les indices des recettes sélectionnées.
+ * @returns {Set<number>} - Ensemble des indices des recettes sélectionnées.
  */
-export function searchInIngredient(){
-
-    const ingredientsArray = Array.from(recipesCard).map(card => card.getAttribute('data-ingredients'));
+export function searchInDescription() {
     
+    const displayedRecipe = document.querySelectorAll(".description-text");
+    const captionsText = Array.from(displayedRecipe).map(el => el.textContent.toLowerCase());
 
-    //transformation de la liste des description en tableau array
-    //const newArray = Array.from(displayedRecipe)
-    //console.log(newArray)
-
-    //creation d'un nouveau tableau ne contenant  que le texte des description
-    //captionsText = newArray.map(function(newArray) {
-    //    return newArray.textContent;
-    //})
-
-    const lowerCaseTextArray = ingredientsArray.map(text => text.toLowerCase());
-
-    //creation d'un tableau contenent l'index des elements
-    const arrayWithIndexes = lowerCaseTextArray.map((string, index) => ({
+    const specificWord = searchInput.value.toLowerCase();
+    
+    const filteredArray = captionsText.map((text, index) => ({
         index: index,
-        value: string
-    }));
+        value: text
+    })).filter(item => item.value.includes(specificWord));
 
+    return new Set(filteredArray.map(item => item.index));
+}
+
+/**
+ * Recherche des recettes dans les titres et retourne les indices des recettes sélectionnées.
+ * @returns {Set<number>} - Ensemble des indices des recettes sélectionnées.
+ */
+export function searchInTitle() {
     
-    //recuperation de la valeur du champ d'entrée
-    const specificWord = searchInput.value;
+    const displayedRecipe = document.querySelectorAll(".card-title");
+    const captionsText = Array.from(displayedRecipe).map(el => el.textContent.toLowerCase());
 
-    //filtrage du tableau selon la valeur du champ d'entrée
-    const filteredArray = arrayWithIndexes.filter(item => item.value.includes(specificWord));
+    const specificWord = searchInput.value.toLowerCase();
     
-    //création d'un tableau contenant les index des elemant filtrés
-    const originalIndexes = filteredArray.map(item => item.index);
+    const filteredArray = captionsText.map((text, index) => ({
+        index: index,
+        value: text
+    })).filter(item => item.value.includes(specificWord));
+
+    return new Set(filteredArray.map(item => item.index));
+}
+
+/**
+ * Recherche des recettes dans les ingrédients et retourne les indices des recettes sélectionnées.
+ * @returns {Set<number>} - Ensemble des indices des recettes sélectionnées.
+ */
+export function searchInIngredient() {
     
-    //création d'un tableau contenant les recettes selectionnées
-    const selectedRecipes = recipesCardArray.filter((_, index) => originalIndexes.includes(index));
+    const ingredientsArray = Array.from(document.querySelectorAll(".card"))
+        .map(card => card.getAttribute('data-ingredient') || '')
+        .map(ingredient => ingredient.toLowerCase());
 
-    //création d'un tableau contenant les recettes non selectionées 
-    const nonSelectedRecipes = recipesCardArray.filter((_, index) => !originalIndexes.includes(index));
+    const specificWord = searchInput.value.toLowerCase();
     
-    //affichage et masquage des carte des recette
-    nonSelectedRecipes.forEach(item => item.classList.add('hiden'));
-    nonSelectedRecipes.forEach(item => item.classList.remove('show'));
+    const filteredArray = ingredientsArray.map((text, index) => ({
+        index: index,
+        value: text
+    })).filter(item => item.value.includes(specificWord));
 
-
-    selectedRecipes.forEach(item => item.classList.add('show'));
-    selectedRecipes.forEach(item => item.classList.remove('hiden'));
+    return new Set(filteredArray.map(item => item.index));
 }
 
 /**
  * Ajoute un gestionnaire d'événements au bouton de recherche pour déclencher la recherche dans la description, le titre et les ingrédients.
  */
-searchInputButton.addEventListener("click", (event) => {
-  
-    const start = performance.now();
+//export function initializeSearch() {
+    
+    searchInputButton.addEventListener("click", (event) => {
+        const start = performance.now();
 
-    searchInDescription();
-    searchInTitle();
-    searchInIngredient();
-    counter();
+        // Obtenir les indices visibles par chaque critère
+        const descriptionIndices = searchInDescription();
+        const titleIndices = searchInTitle();
+        const ingredientIndices = searchInIngredient();
 
-    const end = performance.now();
-    const executionTime = end - start;
+        // Combiner tous les indices pour obtenir un ensemble final
+        const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
 
-    console.log(`Temps d'exécution: ${executionTime} ms`);
-});
+        // Mettre à jour la visibilité des recettes en fonction des indices combinés
+        updateRecipeVisibility(combinedIndices);
+
+        counter();
+
+        const end = performance.now();
+        const executionTime = end - start;
+
+        console.log(`Temps d'exécution: ${executionTime} ms`);
+    });
+//}
 
