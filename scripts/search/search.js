@@ -1,82 +1,81 @@
+
 import { counter } from "../Counter/Counter.js";
 
-const searchInput = document.querySelector(".search-input")
-
-const searchInputButton = document.querySelector(".search-button")
+const searchInput = document.querySelector(".search-input");
+const searchInputButton = document.querySelector(".search-button");
 
 /**
- * Recherche un mot spécifique dans les descriptions des recettes et filtre les cartes des recettes en conséquence.
- * Les cartes correspondantes seront affichées et les autres seront masquées.
- *
- * @function searchInDescription
+ * Recherche un mot spécifique dans les descriptions des recettes et retourne les indices des cartes correspondantes.
+ * @returns {Set<number>} - Ensemble des indices des cartes correspondantes.
  */
 export function searchInDescription() {
     const displayedRecipe = document.querySelectorAll(".description-text");
     const specificWord = searchInput.value.toLowerCase() + " ";
-    const recipesCard = document.querySelectorAll(".card")
-    
-    
+    const indices = new Set();
+
     // Parcours de toutes les descriptions de recettes
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
-        const recipeCard = recipesCard[i];
-
-        // Affichage ou masquage des cartes en fonction de la présence du mot spécifique
         if (text.includes(specificWord)) {
-            recipeCard.classList.add('show');
-            recipeCard.classList.remove('hiden');
-        } else {
-            recipeCard.classList.add('hiden');
-            recipeCard.classList.remove('show');
+            indices.add(i);
         }
     }
+
+    return indices;
 }
 
 /**
- * Recherche un mot spécifique dans les titres des recettes et filtre les cartes des recettes en conséquence.
- * Les cartes correspondantes seront affichées et les autres seront masquées.
- *
- * @function searchInTitle
+ * Recherche un mot spécifique dans les titres des recettes et retourne les indices des cartes correspondantes.
+ * @returns {Set<number>} - Ensemble des indices des cartes correspondantes.
  */
 export function searchInTitle() {
     const displayedRecipe = document.querySelectorAll(".card-title");
-    const specificWord = searchInput.value.toLowerCase() ;
-    const recipesCard = document.querySelectorAll(".card")
-
+    const specificWord = searchInput.value.toLowerCase();
+    const indices = new Set();
 
     // Parcours de tous les titres de recettes
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
-        const recipeCard = recipesCard[i];
-       
-        // Affichage ou masquage des cartes en fonction de la présence du mot spécifique
         if (text.includes(specificWord)) {
-            recipeCard.classList.add('show');
-            recipeCard.classList.remove('hiden');
-        } else {
-            recipeCard.classList.add('hiden');
-            recipeCard.classList.remove('show');
+            indices.add(i);
         }
     }
+
+    return indices;
 }
 
 /**
- * Recherche un mot spécifique dans les ingrédients des recettes et filtre les cartes des recettes en conséquence.
- * Les cartes correspondantes seront affichées et les autres seront masquées.
- *
- * @function searchInIngredient
+ * Recherche un mot spécifique dans les ingrédients des recettes et retourne les indices des cartes correspondantes.
+ * @returns {Set<number>} - Ensemble des indices des cartes correspondantes.
  */
 export function searchInIngredient() {
     const specificWord = searchInput.value.toLowerCase();
-    const recipesCard = document.querySelectorAll(".card")
-    
+    const recipesCard = document.querySelectorAll(".card");
+    const indices = new Set();
+
     // Parcours de tous les ingrédients des recettes
     for (let i = 0; i < recipesCard.length; i++) {
-        const recipeCard = recipesCard[i];
-        const ingredients = recipeCard.getAttribute('data-ingredient').toLowerCase();
-        
-        // Affichage ou masquage des cartes en fonction de la présence du mot spécifique
+        const ingredients = recipesCard[i].getAttribute('data-ingredient').toLowerCase();
         if (ingredients.includes(specificWord)) {
+            indices.add(i);
+        }
+    }
+
+    return indices;
+}
+
+/**
+ * Met à jour la visibilité des cartes de recettes en fonction des indices fournis.
+ * @param {Set<number>} visibleIndices - Ensemble des indices des cartes à afficher.
+ */
+export function updateRecipeVisibility(visibleIndices) {
+    const recipesCard = document.querySelectorAll(".card");
+
+    // Parcours de toutes les cartes de recettes
+    for (let i = 0; i < recipesCard.length; i++) {
+        const recipeCard = recipesCard[i];
+
+        if (visibleIndices.has(i)) {
             recipeCard.classList.add('show');
             recipeCard.classList.remove('hiden');
         } else {
@@ -86,20 +85,24 @@ export function searchInIngredient() {
     }
 }
 
-
 /**
- * Ajoute un événement sur le bouton de recherche pour lancer la recherche dans les descriptions,
- * les titres, et les ingrédients des recettes, et met à jour le compteur.
- * Calcule également le temps d'exécution de ces opérations.
- * 
- * @event
+ * Fonction appelée lors du clic sur le bouton de recherche.
+ * Combine les indices des cartes correspondantes à tous les critères et met à jour leur visibilité.
  */
 searchInputButton.addEventListener("click", (event) => {
     const start = performance.now();
 
-    searchInDescription();
-    searchInTitle();
-    searchInIngredient();
+    // Obtenir les indices visibles par chaque critère
+    const descriptionIndices = searchInDescription();
+    const titleIndices = searchInTitle();
+    const ingredientIndices = searchInIngredient();
+
+    // Combiner tous les indices pour obtenir un ensemble final
+    const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
+
+    // Mettre à jour la visibilité des recettes en fonction des indices combinés
+    updateRecipeVisibility(combinedIndices);
+
     counter();
 
     const end = performance.now();
@@ -107,5 +110,4 @@ searchInputButton.addEventListener("click", (event) => {
 
     console.log(`Temps d'exécution: ${executionTime} ms`);
 });
-
 
