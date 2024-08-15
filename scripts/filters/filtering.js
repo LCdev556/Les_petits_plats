@@ -335,6 +335,15 @@ function createFilterList(filterType, filterArray) {
             searchInDescription();
             searchInTitle();
             searchInIngredient();
+            const descriptionIndices = searchInDescription();
+        const titleIndices = searchInTitle();
+        const ingredientIndices = searchInIngredient();
+
+        // Combiner tous les indices pour obtenir un ensemble final
+        const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
+
+        // Mettre à jour la visibilité des recettes en fonction des indices combinés
+        updateRecipeVisibility(combinedIndices);
             counter();
             // Mise à jour des filtres
             updateFilterArraysBasedOnVisibleCards();
