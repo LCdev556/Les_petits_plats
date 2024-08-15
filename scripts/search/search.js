@@ -1,4 +1,3 @@
-
 import { counter } from "../Counter/Counter.js";
 
 const searchInput = document.querySelector(".search-input");
