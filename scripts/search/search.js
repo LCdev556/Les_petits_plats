@@ -108,6 +108,8 @@ export function searchInIngredient() {
     searchInputButton.addEventListener("click", (event) => {
         const start = performance.now();
 
+        const specificWord = searchInput.value.toLowerCase();
+
         // Obtenir les indices visibles par chaque critère
         const descriptionIndices = searchInDescription();
         const titleIndices = searchInTitle();
@@ -120,6 +122,15 @@ export function searchInIngredient() {
         updateRecipeVisibility(combinedIndices);
 
         counter();
+        const errorMessage = document.querySelector(".search-error-message")
+        if(counter() === 0){
+            
+            errorMessage.textContent = " Aucune recette ne contient <<" + specificWord + ">> vous pouvez chercher 'tarte aux pommes' ,  'poisson' ... "
+            errorMessage.style.display = 'flex';
+        }
+        else{
+            errorMessage.style.display = 'none';
+        }
 
         const end = performance.now();
         const executionTime = end - start;
