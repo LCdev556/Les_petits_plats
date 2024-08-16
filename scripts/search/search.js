@@ -108,34 +108,38 @@ export function searchInIngredient() {
     searchInputButton.addEventListener("click", (event) => {
         const start = performance.now();
 
-        const specificWord = searchInput.value.toLowerCase();
+        const specificWord = searchInput.value
 
-        // Obtenir les indices visibles par chaque critère
-        const descriptionIndices = searchInDescription();
-        const titleIndices = searchInTitle();
-        const ingredientIndices = searchInIngredient();
+        if (specificWord.length >= 3) {
+            // Obtenir les indices visibles par chaque critère
+            const descriptionIndices = searchInDescription();
+            const titleIndices = searchInTitle();
+            const ingredientIndices = searchInIngredient();
 
-        // Combiner tous les indices pour obtenir un ensemble final
-        const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
+            // Combiner tous les indices pour obtenir un ensemble final
+            const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
 
-        // Mettre à jour la visibilité des recettes en fonction des indices combinés
-        updateRecipeVisibility(combinedIndices);
+            // Mettre à jour la visibilité des recettes en fonction des indices combinés
+            updateRecipeVisibility(combinedIndices);
 
-        counter();
-        const errorMessage = document.querySelector(".search-error-message")
-        if(counter() === 0){
+            counter();
+
+            const errorMessage = document.querySelector(".search-error-message")
+
+            if(counter() === 0){
             
-            errorMessage.textContent = " Aucune recette ne contient <<" + specificWord + ">> vous pouvez chercher 'tarte aux pommes' ,  'poisson' ... "
-            errorMessage.style.display = 'flex';
-        }
-        else{
-            errorMessage.style.display = 'none';
-        }
+                errorMessage.textContent = " Aucune recette ne contient <<" + specificWord + ">> vous pouvez chercher 'tarte aux pommes' ,  'poisson' ... "
+                errorMessage.style.display = 'flex';
+            }
+            else{
+                errorMessage.style.display = 'none';
+            }
 
-        const end = performance.now();
-        const executionTime = end - start;
+            const end = performance.now();
+            const executionTime = end - start;
 
-        console.log(`Temps d'exécution: ${executionTime} ms`);
+            console.log(`Temps d'exécution: ${executionTime} ms`);
+        }
     });
 //}
 
