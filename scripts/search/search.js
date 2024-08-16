@@ -106,11 +106,14 @@ export function searchInIngredient() {
 //export function initializeSearch() {
     
     searchInputButton.addEventListener("click", (event) => {
-        const start = performance.now();
+        
 
         const specificWord = searchInput.value
 
         if (specificWord.length >= 3) {
+            
+            const start = performance.now();
+            
             // Obtenir les indices visibles par chaque critère
             const descriptionIndices = searchInDescription();
             const titleIndices = searchInTitle();
