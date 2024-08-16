@@ -91,24 +91,39 @@ export function updateRecipeVisibility(visibleIndices) {
  * Combine les indices des cartes correspondantes à tous les critères et met à jour leur visibilité.
  */
 searchInputButton.addEventListener("click", (event) => {
-    const start = performance.now();
 
-    // Obtenir les indices visibles par chaque critère
-    const descriptionIndices = searchInDescription();
-    const titleIndices = searchInTitle();
-    const ingredientIndices = searchInIngredient();
+    const specificWord = searchInput.value
+    if (specificWord.length >= 3) {
 
-    // Combiner tous les indices pour obtenir un ensemble final
-    const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
+        const start = performance.now();
 
-    // Mettre à jour la visibilité des recettes en fonction des indices combinés
-    updateRecipeVisibility(combinedIndices);
+        // Obtenir les indices visibles par chaque critère
+        const descriptionIndices = searchInDescription();
+        const titleIndices = searchInTitle();
+        const ingredientIndices = searchInIngredient();
 
-    counter();
+        // Combiner tous les indices pour obtenir un ensemble final
+        const combinedIndices = new Set([...descriptionIndices, ...titleIndices, ...ingredientIndices]);
 
-    const end = performance.now();
-    const executionTime = end - start;
+        // Mettre à jour la visibilité des recettes en fonction des indices combinés
+        updateRecipeVisibility(combinedIndices);
 
-    console.log(`Temps d'exécution: ${executionTime} ms`);
+        counter();
+
+        const errorMessage = document.querySelector(".search-error-message")
+        if(counter() === 0){
+            
+            errorMessage.textContent = " Aucune recette ne contient <<" + specificWord + ">> vous pouvez chercher 'tarte aux pommes' ,  'poisson' ... "
+            errorMessage.style.display = 'flex';
+        }
+        else{
+            errorMessage.style.display = 'none';
+        }
+
+        const end = performance.now();
+        const executionTime = end - start;
+        
+        console.log(`Temps d'exécution: ${executionTime} ms`); 
+    }
 });
 

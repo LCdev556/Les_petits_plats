@@ -450,3 +450,12 @@ main{
     display: none;
 }
 
+.search-error-message{
+    display: none;
+    font-family: "anton", sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    justify-content: center;
+    margin-top: 60px;
+    
+}

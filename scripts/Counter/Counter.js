@@ -35,4 +35,6 @@ export function counter() {
     } else {
         counterText.textContent = actualRecipeCard.length + " recettes";
     }
+
+    return (actualRecipeCard.length)
 }
