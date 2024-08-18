@@ -10,14 +10,14 @@ const searchInputButton = document.querySelector(".search-button");
  */
 export function searchInDescription() {
     const displayedRecipe = document.querySelectorAll(".description-text");
-    console.log(displayedRecipe)
+   
     const specificWord = searchInput.value.toLowerCase();
     const indices = new Set();
 
     // Parcours de toutes les descriptions de recettes
     for (let i = 0; i < displayedRecipe.length; i++) {
         const text = displayedRecipe[i].textContent.toLowerCase();
-        console.log(text)
+        
         if (text.includes(specificWord)) {
             indices.add(i);
         }
