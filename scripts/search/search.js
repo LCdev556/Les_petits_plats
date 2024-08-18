@@ -47,9 +47,9 @@ export function updateRecipeVisibility(visibleIndices) {
 export function searchInDescription() {
     
     const displayedRecipe = document.querySelectorAll(".description-text");
-    console.log(displayedRecipe)
+    
     const captionsText = Array.from(displayedRecipe).map(el => el.textContent.toLowerCase());
-    console.log(captionsText)
+    
 
     const specificWord = searchInput.value.toLowerCase();
     
