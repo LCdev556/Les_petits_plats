@@ -1,5 +1,6 @@
 import { counter } from "../Counter/Counter.js";
-
+import { updateFilterArraysBasedOnVisibleCards } from "../filters/filtering.js";
+//import { FilterListeDisplay } from "../filters/filtering.js";
 const searchInput = document.querySelector(".search-input");
 const searchInputButton = document.querySelector(".search-button");
 
@@ -109,6 +110,7 @@ searchInputButton.addEventListener("click", (event) => {
         updateRecipeVisibility(combinedIndices);
 
         counter();
+        //FilterListeDisplay();
 
         const errorMessage = document.querySelector(".search-error-message")
         if(counter() === 0){
@@ -120,6 +122,7 @@ searchInputButton.addEventListener("click", (event) => {
             errorMessage.style.display = 'none';
         }
 
+        updateFilterArraysBasedOnVisibleCards();
         const end = performance.now();
         const executionTime = end - start;
         
